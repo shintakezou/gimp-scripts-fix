@@ -86,6 +86,11 @@
      (height (car (gimp-drawable-height text-layer)))
      (text2-layer (car (gimp-text-fontname img -1 0 0 text 10 TRUE
                         size PIXELS font)))
+
+     (OVERLAY LAYER-MODE-OVERLAY-LEGACY)
+     (NORMAL  LAYER-MODE-NORMAL-LEGACY)
+     (ADDITION LAYER-MODE-ADDITION-LEGACY)
+
      (brd-layer
       (car (gimp-layer-new img width height
                    GRAYA-IMAGE _"Border" 100 OVERLAY)))
@@ -119,7 +124,7 @@
     (gimp-layer-set-lock-alpha text2-layer TRUE)     ; Preserve trans.
     (gimp-context-set-gradient grad)
     (gimp-blend text2-layer
-        CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE FALSE 0 3 0.2
+        BLEND-CUSTOM NORMAL GRADIENT-LINEAR 100 0 REPEAT-NONE FALSE FALSE 0 3 0.2
         (/ width 2) 0 (/ width 2) height)
     (gimp-layer-set-lock-alpha text2-layer FALSE)
     ; and hide the bg and this new one
@@ -151,10 +156,13 @@
     (gimp-brightness-contrast text2-layer -20 -20))
 
     ; Bumpmapping depends on do we need the flames or not...
+    (let* (
+           (LINEAR 0) ; bump map type
+          )
     (plug-in-bump-map 1 img text2-layer bump-layer
               (if (eq? fierytog FALSE) 135.00 90.00)
               (if (eq? fierytog FALSE) 45.00 30.0)
-              6 0 0 0 0 FALSE FALSE LINEAR)
+              6 0 0 0 0 FALSE FALSE LINEAR))
 
     (gimp-image-remove-layer img bump-layer)
 
