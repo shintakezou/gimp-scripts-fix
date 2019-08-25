@@ -32,6 +32,8 @@
       ; image size 10% wider than the planet on each side
       (imgSize (+ planetSize (* tenth 2)) )
 
+      (NORMAL LAYER-MODE-NORMAL-LEGACY)
+
       (theImage (car (gimp-image-new imgSize  imgSize RGB) ))
       (layerbase (car (gimp-layer-new theImage imgSize imgSize 0 "planet base" 100 NORMAL) ) )
       (layeratmosph (car (gimp-layer-new theImage imgSize imgSize 0 "planet atmosphere" 100 NORMAL) ) )
