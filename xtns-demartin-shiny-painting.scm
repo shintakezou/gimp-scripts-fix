@@ -48,6 +48,7 @@
 
 (define (Aply-script-fu-shiny img Bump-Layer fond-color damage LightA LightPX LightPY Bcolor Crackeled bumpmap_depth)
   (let* ((sizeX (car (gimp-drawable-width Bump-Layer)))
+    (NORMAL LAYER-MODE-NORMAL-LEGACY)
     (sizeY (car (gimp-drawable-height Bump-Layer)))
         (Bunped_layer (car (gimp-layer-copy Bump-Layer FALSE)))
         (seed (* 30 30))
@@ -118,14 +119,15 @@
 (gimp-selection-all img)
 
     ; Bumping the letters
+    (let* ((LINEAR 0))
       (plug-in-gauss 1 img Bump-Layer 10 10 0)
       (plug-in-bump-map TRUE img Bunped_layer Bump-Layer  125 30 bumpmap_depth 0 0 0 0 TRUE TRUE LINEAR)
     ; bumpmap on layer 2
       (plug-in-bump-map TRUE img calque2 Bump-Layer     125 30 bumpmap_depth 0 0 0 0 TRUE TRUE LINEAR)
-      (plug-in-bump-map TRUE img calque2 calque2     125 45 bumpmap_depth 0 0 0 0 TRUE FALSE LINEAR)
+      (plug-in-bump-map TRUE img calque2 calque2     125 45 bumpmap_depth 0 0 0 0 TRUE FALSE LINEAR))
 
     ;Light efect
-      (plug-in-lighting 1 img calque2 calque2 0 TRUE FALSE 0 0 blanc LightPX LightPY                               LightA -1.19 -7.14 1.00 0.9 2 2 LightA 10 TRUE FALSE FALSE)
+      (plug-in-lighting 1 img calque2 calque2 0 TRUE FALSE 0 0 blanc LightPX LightPY LightA -1.19 -7.14 1.00 0.9 2 2 LightA 10 TRUE FALSE FALSE)
     (gimp-layer-set-mode calque1 8)
     (gimp-layer-set-offsets Bump-Layer 18 12)
     (plug-in-gauss 1 img Bump-Layer 20 20 0)
