@@ -40,6 +40,7 @@
 (define (Aply-script-fu-Liquid-Water img Bump-Layer Back-color ShapeW DropsA LightA )
   (let* ((width (car (gimp-drawable-width Bump-Layer)))
     (height (car (gimp-drawable-height Bump-Layer)))
+        (displace-type 1)  ; WRAP
         (Noise_width 0)
         (Noise_height 0)
         (DropsA (*  DropsA 2.55))
@@ -48,6 +49,7 @@
         (theLayersArray 0)
         (DropShadow 0)
         (activ_selection (car (gimp-selection-is-empty img)))
+        (NORMAL LAYER-MODE-NORMAL-LEGACY)
     (Noise_calque (car (gimp-layer-new img width height RGBA-IMAGE _"Noise" 100 3)))
     (Background-Color_calque (car (gimp-layer-new img width height RGBA-IMAGE _"Background-Color" 100
                                                                                  NORMAL)))
@@ -143,7 +145,7 @@
     (plug-in-bump-map TRUE img Highlight_down Bump-Layer  300 30 30 0 0 0 0 TRUE TRUE 3)
     (gimp-selection-layer-alpha Highlight_fill)
     (gimp-edit-clear Shadow)
-    (plug-in-displace 1 img Mosaic_calque 2 -4 2 2 Bump-Layer Bump-Layer 0)
+    (plug-in-displace 1 img Mosaic_calque 2 -4 2 2 Bump-Layer Bump-Layer displace-type)
     (plug-in-lighting
                        1 img Highlight_up Highlight_up  Highlight_up FALSE FALSE FALSE 0 White
                        -1 -1 1 -4 -0 1 LightA
