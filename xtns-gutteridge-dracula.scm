@@ -52,6 +52,7 @@
     (define oldBack (car(gimp-context-get-background)) )
 
     (define theImage (car(gimp-image-new 100 100 RGB)) )
+    (define NORMAL LAYER-MODE-NORMAL-LEGACY)
     (define textLayer (car(gimp-layer-new theImage 10 10 RGBA-IMAGE _"Text Layer" 100 NORMAL)) )
     (define bloodLayer (car(gimp-layer-new theImage 10 10 RGBA-IMAGE _"Blood Layer" 100 NORMAL)) )
     (define backLayer(car(gimp-layer-new theImage 10 10 RGBA-IMAGE _"Background" 100 NORMAL)) )
