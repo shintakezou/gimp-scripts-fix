@@ -7,25 +7,39 @@ See
 - https://www.gimp.org/docs/script-fu-update.html
 
 
+The issues described in that link seem to be already fixed: there are
+other issues not stricly related to the change of the language, but
+likely to changes in GIMP (2.10.8).
+
+E.g., having `LAYER-MODE-NORMAL` instead of `NORMAL` or `BLEND-LINEAR`
+instead of just `LINEAR` it's a good thing, but it breaks code using
+the “unprefixed” symbols.
+
+
+**Note**: those scripts are installed, in my current (as of August, 2019)
+Ubuntu 19.04 distro, in `/usr/share/gimp/2.0/scripts/` and GIMP's
+version is 2.10.8 as already written.
+
+
 
 ## planet-render1-2.scm
 
-It seemed already fixed, except for the use of `NORMAL`, which in GIMP
-2.10.8 (from the repository of the GNU/Linux distro Ubuntu 19.04).
+- `NORMAL` becomes `LAYER-MODE-NORMAL-LEGACY`.
 
-`NORMAL` becomes a synonym for `LAYER-MODE-NORMAL-LEGACY`.
+The use of the `-LEGACY` version seems logical. I haven't tried
+otherwise.
 
 
 ## xtns-demartin-liquid-water.scm
 
-Same problem with `NORMAL`; plus, used 0 as `displace-type` argument
-for `plug-in-displace`, but accepted values range from 1 to 3 for
-the edge behaviour. I've chosen 1 (`WRAP`).
+- `NORMAL` becomes `LAYER-MODE-NORMAL-LEGACY`
+- `displace-type` for `plug-in-displace` set to 1 (`WRAP`): 0 isn't in
+  the range of accepted values.
 
 
 ## xtns-lankinen-fiery-steel.scm
 
-- `NORMAL`, `OVERLAY` and `ADDITION` becomes `LAYER-MODE-*-LEGACY`
+- `NORMAL`, `OVERLAY` and `ADDITION` become `LAYER-MODE-*-LEGACY`
 - `CUSTOM` for `gimp-blend` becomes `BLEND-CUSTOM`
 - `LINEAR` for `gimp-blend` becomes `GRADIENT-LINEAR`
 - `LINEAR` for `plug-in-bump-map` locally defined as 0
