@@ -276,6 +276,7 @@
 ;
 ; Effect #1 - Cubism
 ;
+(define plug-in-scatter-hsv plug-in-hsv-noise)
 (if (= etype 0)
    (begin
    (plug-in-scatter-hsv 1 img logo-layer 1 scatter 10 10)
